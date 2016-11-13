@@ -48,7 +48,7 @@ class ContentController extends Controller
     {
         $content = Content::findOrFail($id);
 
-        return view('play', ['content' => $content]);
+        return view('contents/play', ['content' => $content]);
     }
 
     /**
