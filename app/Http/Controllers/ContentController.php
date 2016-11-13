@@ -24,7 +24,7 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $contents = Content::all();
+        $contents = Content::simplePaginate(12);
 
         return view('contents/index', ['contents' => $contents]);
     }

@@ -23,4 +23,7 @@
         @endforeach
     </div>
 </div>
+<div class="text-center">
+{{ $contents->links() }}
+</div>
 @endsection
