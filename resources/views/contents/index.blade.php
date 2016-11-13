@@ -1,26 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container content_list">
     <div class="row">
         @foreach ($contents as $content)
-        <div class="col-md-4">
-            <div class="thumbnail">
-                <img src="{{ $content->thumbnail or '/image/thumbnail-default.png' }}" alt="" />
-                <div class="caption">
+        <div class="col-md-3 col-sm-4 content_item">
+            <div onclick="location.assign('/contents/{{ $content->id }}')">
+                <div class="content_thumbnail" style="background-image: url({{ $content->thumbnail or '/image/thumbnail-default.png' }})">
+                    <div>
+                    {{ $content->description or 'No descriptions' }}
+                    </div>
+                </div>
+                <div class="content_article">
                     <h3>{{ $content->title }}</h3>
                 </div>
-                <p>
-                    {{ $content->description or 'No descriptions' }}
-                </p>
-                <p>
-                    <a href="/contents/{{ $content->id }}" class="btn btn-primary" role="button">
-                        Play
-                    </a>
-                </p>
             </div>
         </div>
         @endforeach
     </div>
+</div>
+<div class="text-center">
+{{ $contents->links() }}
 </div>
 @endsection
