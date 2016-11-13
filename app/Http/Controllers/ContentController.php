@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Content;
 
 class ContentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,9 @@ class ContentController extends Controller
      */
     public function index()
     {
-        //
+        $contents = Content::all();
+        
+        return view('contents/index', ['contents' => $contents]);
     }
 
     /**
@@ -24,7 +32,7 @@ class ContentController extends Controller
      */
     public function create()
     {
-        //
+        return view('contents/upload');
     }
 
     /**
@@ -35,7 +43,23 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->user();
+        $content = new Content;
+        $content->user_id = $user->id;
+        $content->title = $request->input('title');
+        $content->description = $request->input('description');
+        $content->src = Storage::url(
+            Storage::disk('public')
+                ->putFile('contents', $request->file('content'))
+        );
+        if ($request->hasFile('thumbnail')) {
+            $content->thumbnail = Storage::url(
+                Storage::disk('public')
+                    ->putFile('thumbnails', $request->file('thumbnail'))
+            );
+        }
+        $content->save();
+        return view('contents/uploaded', ['content' => $content]);
     }
 
     /**
@@ -48,7 +72,7 @@ class ContentController extends Controller
     {
         $content = Content::findOrFail($id);
 
-        return view('play', ['content' => $content]);
+        return view('contents/play', ['content' => $content]);
     }
 
     /**
