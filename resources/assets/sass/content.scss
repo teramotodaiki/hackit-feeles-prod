@@ -1,0 +1,16 @@
+
+.content-overlay {
+
+  position: absolute;
+  top: 0;
+  padding-top: $navbar-height;
+  width: 100vw;
+  height: 100vh;
+
+  &>iframe {
+    width: 100%;
+    height: 100%;
+    border-width: 0;
+  }
+
+}
