@@ -60,6 +60,12 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="{{ url('/contents/create') }}">
+                                            Upload
+                                        </a>
+                                    </li>
+                                    <hr>
+                                    <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
