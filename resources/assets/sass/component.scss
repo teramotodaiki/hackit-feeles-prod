@@ -1,0 +1,12 @@
+.component_alert {
+  position: absolute;
+  top: 0px;
+  z-index: 1100;
+  width: 100%;
+
+  &>.alert {
+    max-width: 100%;
+    width: 30rem;
+    margin: 0 auto;
+  }
+}
