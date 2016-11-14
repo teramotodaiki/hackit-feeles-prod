@@ -45,7 +45,7 @@
     background-color: #fff;
     border-radius: $panel-border-radius;
     @include transition(box-shadow .2s ease, transform .2s ease);
-    @media (max-width: $screen-xs-min) {
+    @media (max-width: $screen-xs-max) {
       height: 10rem !important;
       flex-direction: row;
     }
@@ -54,7 +54,7 @@
   &:hover>*:first-child {
     box-shadow: 0 3px 10px rgba(0, 0, 0, .16), 0 3px 10px rgba(0, 0, 0, .23);
     transform: scale(1.21);
-    @media (max-width: $screen-xs-min) {
+    @media (max-width: $screen-xs-max) {
       transform: scale(1.04);
     }
   }
@@ -63,7 +63,7 @@
     position: relative;
     flex: 1 1 auto;
     background-size: contain;
-    background-position: center top;
+    background-position: left top;
     background-repeat: no-repeat;
 
     &>*:first-child {
@@ -76,7 +76,7 @@
 
   .content_article {
     flex: 0 0 auto;
-    @media (max-width: $screen-xs-min) {
+    @media (max-width: $screen-xs-max) {
       width: 50%;
     }
   }
