@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use WindowsAzure\Common\ServicesBuilder;
-use WindowsAzure\Common\ServiceException;
-use MicrosoftAzure\Storage\Blob\Models\CreateBlobOptions;
 use App\Content;
 
 class ContentController extends Controller
@@ -14,7 +10,7 @@ class ContentController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->blobRestProxy = null;
+        $this->middleware('uploader:content,thumbnail')->only('store');
     }
 
     /**
@@ -52,25 +48,10 @@ class ContentController extends Controller
         $content->user_id = $user->id;
         $content->title = $request->input('title');
         $content->description = $request->input('description');
-
-        try {
-            $content->src = $this->getPublicUrl(
-                env('BLOB_CONTAINER'),
-                $request->content,
-                env('BLOB_ENABLED')
-            );
-            if ($request->file('thumbnail')->isValid()) {
-                $content->thumbnail = $this->getPublicUrl(
-                    env('BLOB_CONTAINER_THUMBNAIL'),
-                    $request->thumbnail,
-                    env('BLOB_ENABLED')
-                );
-            }
-        } catch (ServiceException $e) {
-            return response(['message' => 'upload_blob_error'], 500);
-        }
-
+        $content->src = $request->uploaded->content;
+        $content->thumbnail = $request->uploaded->thumbnail;
         $content->save();
+
         return view('contents/uploaded', ['content' => $content]);
     }
 

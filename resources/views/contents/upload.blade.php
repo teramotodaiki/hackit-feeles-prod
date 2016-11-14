@@ -28,7 +28,7 @@
                             <label for="description" class="col-md-4 control-label">Description</label>
 
                             <div class="col-md-6">
-                                <input id="description" type="text" class="form-control" name="description" value="{{ old('description') }}" autofocus>
+                                <input id="description" type="text" class="form-control" name="description" value="{{ old('description') }}">
 
                                 @if ($errors->has('description'))
                                     <span class="help-block">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('thumbnail') ? ' has-error' : '' }}">
                             <label for="thumbnail" class="col-md-4 control-label">Thumbnail (optional)</label>
 
                             <div class="col-md-6">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdateUser;
 use App\User;
 
 class UserController extends Controller
@@ -10,6 +11,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('uploader:thumbnail')->only('update');
         // $this->middleware('admin')->only('index');
     }
 
@@ -54,7 +56,14 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $contents = $user->contents()
+            ->paginate(12);
+
+        return view('users/profile', [
+            'user' => $user,
+            'contents' => $contents
+        ]);
     }
 
     /**
@@ -65,7 +74,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('users/edit', ['user' => $user]);
     }
 
     /**
@@ -75,9 +86,32 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUser $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        if ($request->has('password')) {
+            if (!password_verify($request->input('password_current'), $user->password)) {
+                return redirect()
+                    ->route('users.edit', [$user])
+                    ->with('status', 'danger')
+                    ->with('message', 'Password inncorrect!!!');
+            }
+
+            $user->password = bcrypt($request->input('password'));
+        }
+        if ($request->hasFile('thumbnail')) {
+            $user->thumbnail = $request->uploaded->thumbnail;
+        }
+        $user->save();
+
+        $user->update(
+            $request->except(['userid', 'email', 'password'])
+        );
+
+        return redirect()
+            ->route('users.edit', [$user])
+            ->with('status', 'success');
     }
 
     /**

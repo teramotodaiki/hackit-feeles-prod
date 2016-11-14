@@ -64,6 +64,13 @@
                                             Upload
                                         </a>
                                     </li>
+                                    @if (Auth::check())
+                                    <li>
+                                        <a href="{{ url('/users/' . Auth::user()->id) }}">
+                                            My Page
+                                        </a>
+                                    </li>
+                                    @endif
                                     <li class="divider"></li>
                                     <li>
                                         <a href="{{ url('/logout') }}"
