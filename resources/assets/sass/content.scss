@@ -44,6 +44,7 @@
     align-items: stretch;
     background-color: #fff;
     border-radius: $panel-border-radius;
+    overflow: hidden;
     @include transition(box-shadow .2s ease, transform .2s ease);
     @media (max-width: $screen-xs-max) {
       height: 10rem !important;
