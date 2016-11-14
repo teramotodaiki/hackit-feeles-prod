@@ -17,7 +17,6 @@ class ContentsTableSeeder extends Seeder
             'src' => 'https://teramotodaiki.github.io/h4p/dist/',
             'title' => 'Feeles Example',
             'description' => '......Here is a description......',
-            'thumbnail' => 'http://bit.ly/2eTq3oR',
         ]);
     }
 }
