@@ -54,7 +54,14 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $contents = $user->contents()
+            ->paginate(12);
+
+        return view('users/profile', [
+            'user' => $user,
+            'contents' => $contents
+        ]);
     }
 
     /**
