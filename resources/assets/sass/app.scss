@@ -6,7 +6,9 @@
 @import "variables";
 
 // Bootstrap
+$icon-font-path: '/fonts/bootstrap/';
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 
-@import "content"
+@import "content";
+@import "user";

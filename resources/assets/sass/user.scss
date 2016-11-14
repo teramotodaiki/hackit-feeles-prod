@@ -1,0 +1,27 @@
+
+.user_list {
+
+  margin-top: 1rem;
+  background-color: $navbar-default-bg;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $navbar-default-border;
+  border-radius: $panel-border-radius;
+
+}
+
+.user_item {
+
+  margin: 1rem 0;
+  padding: 1rem 0;
+  overflow-wrap: break-word;
+  word-break: break-all;
+
+  border-bottom: 1px solid $navbar-default-border;
+
+  &.user_item-last {
+    border: none;
+    margin-bottom: 0;
+  }
+
+}
