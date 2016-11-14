@@ -80,9 +80,7 @@
 
                 <div class="links">
                     <a href="/contents">Works</a>
-                    @if (Auth::check() && Auth::user()->is_admin)
                     <a href="/users">Member</a>
-                    @endif
                 </div>
             </div>
         </div>
