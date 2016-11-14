@@ -16,6 +16,9 @@
 
                 @if (Auth::user()->id === $user->id)
                 <div class="panel-footer">
+                    <a href="{{ url("/users/{$user->id}/edit") }}" type="button" class="btn btn-primary btn-block">
+                        Update
+                    </a>
                 </div>
                 @endif
 
