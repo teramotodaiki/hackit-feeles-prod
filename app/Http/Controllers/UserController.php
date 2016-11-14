@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin')->only('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::paginate(25);
+
+        return view('users/index', ['users' => $users]);
     }
 
     /**
