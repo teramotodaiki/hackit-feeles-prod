@@ -11,6 +11,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('uploader:thumbnail')->only('update');
         // $this->middleware('admin')->only('index');
     }
 
@@ -98,8 +99,11 @@ class UserController extends Controller
             }
 
             $user->password = bcrypt($request->input('password'));
-            $user->save();
         }
+        if ($request->hasFile('thumbnail')) {
+            $user->thumbnail = $request->uploaded->thumbnail;
+        }
+        $user->save();
 
         $user->update(
             $request->except(['userid', 'email', 'password'])
