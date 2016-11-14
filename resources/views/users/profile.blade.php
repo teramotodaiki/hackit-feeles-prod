@@ -23,6 +23,7 @@
         </div>
         <div class="col-md-10 container">
             <div class="row content_list">
+            @each('contents.item', $contents, 'content')
             </div>
             <div class="text-center">
             {{ $contents->links() }}
