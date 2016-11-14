@@ -52,7 +52,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('thumbnail') ? ' has-error' : '' }}">
                             <label for="thumbnail" class="col-md-4 control-label">Thumbnail (optional)</label>
 
                             <div class="col-md-6">
