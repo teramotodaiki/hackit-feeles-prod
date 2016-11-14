@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdateUser;
 use App\User;
 
 class UserController extends Controller
@@ -84,9 +85,29 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUser $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        if ($request->has('password')) {
+            if (!password_verify($request->input('password_current'), $user->password)) {
+                return redirect()
+                    ->route('users.edit', [$user])
+                    ->with('status', 'danger')
+                    ->with('message', 'Password inncorrect!!!');
+            }
+
+            $user->password = bcrypt($request->input('password'));
+            $user->save();
+        }
+
+        $user->update(
+            $request->except(['userid', 'email', 'password'])
+        );
+
+        return redirect()
+            ->route('users.edit', [$user])
+            ->with('status', 'success');
     }
 
     /**
