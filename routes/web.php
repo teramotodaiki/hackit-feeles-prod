@@ -19,6 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/invitations', 'InvitationController@index');
+Route::post('/invitations', 'InvitationController@store');
+
 Route::resource('contents', 'ContentController');
 Route::post('contents/{id}/update', 'ContentController@update'); // With multipart/form-data
 
