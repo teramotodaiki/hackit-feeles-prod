@@ -22,3 +22,4 @@ Route::get('/home', 'HomeController@index');
 Route::resource('contents', 'ContentController');
 
 Route::resource('users', 'UserController');
+Route::post('users/{id}/update', 'UserController@update'); // With multipart/form-data
