@@ -76,7 +76,9 @@ class ContentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $content = Content::findOrFail($id);
+
+        return view('contents/edit', ['content' => $content]);
     }
 
     /**
