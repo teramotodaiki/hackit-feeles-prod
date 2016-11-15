@@ -123,9 +123,16 @@ class ContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $content = Content::findOrFail($id);
+        if ($content->user_id !== $request->user()->id) {
+            return response('Forbidden', 403);
+        }
+
+        $content->delete();
+
+        return redirect('/home');
     }
 
 }
