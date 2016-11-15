@@ -86,9 +86,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUser $request, $id)
+    public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'string|max:255',
+            'thumbnail' => 'sometimes|image',
+            'password_current' => 'required_with:password',
+            'password' => 'sometimes|min:6|confirmed',
+        ]);
+
         $user = User::findOrFail($id);
+        if ($user->id !== $request->user()->id) {
+            return response('Forbidden', 403);
+        }
 
         if ($request->has('password')) {
             if (!password_verify($request->input('password_current'), $user->password)) {
