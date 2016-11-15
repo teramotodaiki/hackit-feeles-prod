@@ -102,41 +102,4 @@ class ContentController extends Controller
         //
     }
 
-    private function getPublicUrl($containerName, $uploadedFile, $useBlobStorage)
-    {
-        if (!$useBlobStorage) {
-            return Storage::url(
-                Storage::disk('public')
-                    ->putFile($containerName, $uploadedFile)
-            );
-        }
-        if (!$this->blobRestProxy) {
-            $this->blobRestProxy = ServicesBuilder::getInstance()
-                ->createBlobService(env('BLOB_CONNECTION', ''));
-        }
-
-        $content_hashname = $uploadedFile->hashName();
-        $tmpdir = 'tmp/';
-        $filepath = public_path($tmpdir) . $content_hashname;
-
-        $options = new CreateBlobOptions();
-        $options->setBlobContentType($uploadedFile->getMimeType());
-
-        $uploadedFile->move($tmpdir, $content_hashname);
-        $content_file = fopen($filepath, 'r');
-
-        $this->blobRestProxy->createBlockBlob(
-            $containerName,
-            $content_hashname,
-            $content_file,
-            $options
-        );
-
-        fclose($content_file);
-        unlink($filepath);
-
-        return env('BLOB_URL') .
-            $containerName . '/' .
-            $content_hashname;
-    }
 }
