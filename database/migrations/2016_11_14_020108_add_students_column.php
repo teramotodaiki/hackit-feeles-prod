@@ -36,7 +36,7 @@ class AddStudentsColumn extends Migration
     {
         Schema::table('users', function (Blueprint $table)
         {
-            $table->dropUnique(['userid']);
+            // $table->dropUnique(['userid']);
             $table->dropColumn([
                 'is_admin',
                 'userid',
