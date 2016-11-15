@@ -90,7 +90,6 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'string|max:255',
-            'thumbnail' => 'sometimes|image',
             'password_current' => 'required_with:password',
             'password' => 'sometimes|min:6|confirmed',
         ]);
