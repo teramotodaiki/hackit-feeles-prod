@@ -27,3 +27,10 @@ Route::post('contents/{id}/update', 'ContentController@update'); // With multipa
 
 Route::resource('users', 'UserController');
 Route::post('users/{id}/update', 'UserController@update'); // With multipart/form-data
+
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
+{
+    Route::get('/', function() { return view('admin'); });
+    Route::post('invite', 'AdminController@invite');
+    Route::post('discardInvitation', 'AdminController@discardInvitation');
+});
