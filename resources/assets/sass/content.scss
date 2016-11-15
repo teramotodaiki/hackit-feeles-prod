@@ -63,8 +63,8 @@
   .content_thumbnail {
     position: relative;
     flex: 1 1 auto;
-    background-size: contain;
-    background-position: left top;
+    background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
 
     &>*:first-child {
