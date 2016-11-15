@@ -13,7 +13,13 @@ class CreateInvitationsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('invitations', function (Blueprint $table)
+        {
+            $table->increments('id');
+            $table->timestamp('expired_at')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ class CreateInvitationsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('invitations');
     }
 }
