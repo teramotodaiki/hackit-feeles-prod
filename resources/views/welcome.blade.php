@@ -88,6 +88,7 @@
                     @if (isset($invitation))
                     <a href="/invitations">Join</a>
                     @endif
+                    <a href="/admin">Admin</a>
                 </div>
             </div>
         </div>
