@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::resource('contents', 'ContentController');
+Route::post('contents/{id}/update', 'ContentController@update'); // With multipart/form-data
 
 Route::resource('users', 'UserController');
 Route::post('users/{id}/update', 'UserController@update'); // With multipart/form-data

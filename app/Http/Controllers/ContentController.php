@@ -10,7 +10,7 @@ class ContentController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('uploader:content,thumbnail')->only('store');
+        $this->middleware('uploader:content,thumbnail')->only(['store', 'update']);
     }
 
     /**
@@ -90,7 +90,31 @@ class ContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+        ]);
+
+        $content = Content::findOrFail($id);
+        if ($content->user_id !== $request->user()->id) {
+            return response('Forbidden', 403);
+        }
+
+        if ($request->hasFile('content')) {
+            $content->src = $request->uploaded->content;
+            $content->save();
+        }
+
+        if ($request->hasFile('thumbnail')) {
+            $content->thumbnail = $request->uploaded->thumbnail;
+            $content->save();
+        }
+
+        $content->update($request->all());
+
+        return redirect()
+            ->route('contents.edit', [$content])
+            ->with('status', 'success');
     }
 
     /**
