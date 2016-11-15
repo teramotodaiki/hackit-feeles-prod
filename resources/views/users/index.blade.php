@@ -10,10 +10,10 @@
             @endif
         </div>
         <div class="col-xs-5">
-            {{ $user->name }}
+            <a href="/users/{{ $user->id }}">{{ $user->name }}</a>
         </div>
         <div class="col-xs-3">
-            <span>{{ $user->userid }}</span>
+            <span>{{ '@' . $user->userid }}</span>
         </div>
         <div class="col-xs-3">
             <span>{{ $user->created_at }}</span>

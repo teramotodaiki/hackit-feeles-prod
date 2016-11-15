@@ -10,7 +10,7 @@ class ContentController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('uploader:content,thumbnail')->only('store');
+        $this->middleware('uploader:content,thumbnail')->only(['store', 'update']);
     }
 
     /**
@@ -76,7 +76,9 @@ class ContentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $content = Content::findOrFail($id);
+
+        return view('contents/edit', ['content' => $content]);
     }
 
     /**
@@ -88,7 +90,31 @@ class ContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+        ]);
+
+        $content = Content::findOrFail($id);
+        if ($content->user_id !== $request->user()->id) {
+            return response('Forbidden', 403);
+        }
+
+        if ($request->hasFile('content')) {
+            $content->src = $request->uploaded->content;
+            $content->save();
+        }
+
+        if ($request->hasFile('thumbnail')) {
+            $content->thumbnail = $request->uploaded->thumbnail;
+            $content->save();
+        }
+
+        $content->update($request->all());
+
+        return redirect()
+            ->route('contents.edit', [$content])
+            ->with('status', 'success');
     }
 
     /**
@@ -97,46 +123,16 @@ class ContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
-    }
-
-    private function getPublicUrl($containerName, $uploadedFile, $useBlobStorage)
-    {
-        if (!$useBlobStorage) {
-            return Storage::url(
-                Storage::disk('public')
-                    ->putFile($containerName, $uploadedFile)
-            );
-        }
-        if (!$this->blobRestProxy) {
-            $this->blobRestProxy = ServicesBuilder::getInstance()
-                ->createBlobService(env('BLOB_CONNECTION', ''));
+        $content = Content::findOrFail($id);
+        if ($content->user_id !== $request->user()->id) {
+            return response('Forbidden', 403);
         }
 
-        $content_hashname = $uploadedFile->hashName();
-        $tmpdir = 'tmp/';
-        $filepath = public_path($tmpdir) . $content_hashname;
+        $content->delete();
 
-        $options = new CreateBlobOptions();
-        $options->setBlobContentType($uploadedFile->getMimeType());
-
-        $uploadedFile->move($tmpdir, $content_hashname);
-        $content_file = fopen($filepath, 'r');
-
-        $this->blobRestProxy->createBlockBlob(
-            $containerName,
-            $content_hashname,
-            $content_file,
-            $options
-        );
-
-        fclose($content_file);
-        unlink($filepath);
-
-        return env('BLOB_URL') .
-            $containerName . '/' .
-            $content_hashname;
+        return redirect('/home');
     }
+
 }
