@@ -81,6 +81,9 @@
                 <div class="links">
                     <a href="/contents">Works</a>
                     <a href="/users">Member</a>
+                    @if (isset($invitation))
+                    <a href="/invitations">Join</a>
+                    @endif
                 </div>
             </div>
         </div>
