@@ -15,7 +15,7 @@ class AddStudentsColumn extends Migration
     {
         Schema::table('users', function (Blueprint $table)
         {
-            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_admin')->nullable();
             $table->string('userid')->unique();
             $table->boolean('is_male')->nullable();
             $table->date('birthday')->nullable();
