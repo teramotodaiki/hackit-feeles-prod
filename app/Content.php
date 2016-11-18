@@ -13,6 +13,11 @@ class Content extends Model
         'title', 'description',
     ];
 
+    protected $casts = [
+        'id' => 'integer',
+        'user_id' => 'integer',
+    ];
+
     protected $dates = ['deleted_at'];
 
     public function user()

@@ -20,7 +20,8 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $contents = Content::simplePaginate(12);
+        $contents = Content::orderBy('id', 'desc')
+            ->simplePaginate(12);
 
         return view('contents/index', ['contents' => $contents]);
     }

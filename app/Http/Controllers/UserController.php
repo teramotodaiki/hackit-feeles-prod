@@ -58,6 +58,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $contents = $user->contents()
+            ->orderBy('id', 'desc')
             ->paginate(12);
 
         return view('users/profile', [
