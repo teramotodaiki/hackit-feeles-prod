@@ -8,7 +8,9 @@
     <nav class="content_footer navbar navbar-default">
 
         @if (Auth::check() && Auth::user()->id === $content->user->id)
-        <a href="/contents/{{ $content->id }}/edit" class="btn btn-primary">Edit</a>
+        <a href="/contents/{{ $content->id }}/edit" class="btn btn-primary">
+            @lang('form.edit')
+        </a>
         @else
         <a href="/users/{{ $content->user_id }}" class="btn btn-link">
             {{ $content->user->name }}

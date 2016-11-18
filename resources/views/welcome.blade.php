@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -72,8 +72,12 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login') && env('PUBLIC_REGISTER', false))
                 <div class="top-right links">
-                    <a href="{{ url('/login') }}">Login</a>
-                    <a href="{{ url('/register') }}">Register</a>
+                    <a href="{{ url('/login') }}">
+                        @lang('menu.login')
+                    </a>
+                    <a href="{{ url('/register') }}">
+                        @lang('menu.register')
+                    </a>
                 </div>
             @endif
 
@@ -84,15 +88,17 @@
 
                 @if (isset($invitation))
                 <div class="links m-b-md">
-                    <a href="/invitations">Join</a>
+                    <a href="/invitations">
+                        @lang('form.join')
+                    </a>
                 </div>
                 @endif
 
                 <div class="links">
-                    <a href="/contents">Works</a>
-                    <a href="/users">Member</a>
-                    <a href="/studentLogin">Login</a>
-                    <a href="/admin">Admin</a>
+                    <a href="/contents">@lang('menu.works')</a>
+                    <a href="/users">@lang('menu.member')</a>
+                    <a href="/studentLogin">@lang('menu.login')</a>
+                    <a href="/admin">@lang('menu.admin')</a>
                 </div>
             </div>
         </div>

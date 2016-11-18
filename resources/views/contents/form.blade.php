@@ -2,7 +2,9 @@
     {{ csrf_field() }}
 
     <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-        <label for="title" class="col-md-4 control-label">Title</label>
+        <label for="title" class="col-md-4 control-label">
+            @lang('form.title')
+        </label>
 
         <div class="col-md-6">
             <input id="title" type="text" class="form-control" name="title" value="{{
@@ -18,7 +20,9 @@
     </div>
 
     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-        <label for="description" class="col-md-4 control-label">Description</label>
+        <label for="description" class="col-md-4 control-label">
+            @lang('form.description')
+        </label>
 
         <div class="col-md-6">
             <input id="description" type="text" class="form-control" name="description" value="{{
@@ -34,7 +38,9 @@
     </div>
 
     <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
-        <label for="content" class="col-md-4 control-label">Content HTML</label>
+        <label for="content" class="col-md-4 control-label">
+            @lang('form.content_html')
+        </label>
 
         <div class="col-md-6">
             <input id="content" type="file" class="form-control" name="content" value="{{ old('content') }}" required accept="text/html">
@@ -48,7 +54,10 @@
     </div>
 
     <div class="form-group{{ $errors->has('thumbnail') ? ' has-error' : '' }}">
-        <label for="thumbnail" class="col-md-4 control-label">Thumbnail (optional)</label>
+        <label for="thumbnail" class="col-md-4 control-label">
+            @lang('form.thumbnail')
+            (@lang('form.optional'))
+        </label>
 
         <div class="col-md-6">
             <input id="thumbnail" type="file" class="form-control" name="thumbnail" value="{{ old('thumbnail') }}" accept="image/*">

@@ -51,8 +51,12 @@
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             @if(env('PUBLIC_REGISTER', false))
-                                <li><a href="{{ url('/login') }}">Login</a></li>
-                                <li><a href="{{ url('/register') }}">Register</a></li>
+                                <li><a href="{{ url('/login') }}">
+                                    @lang('menu.login')
+                                </a></li>
+                                <li><a href="{{ url('/register') }}">
+                                    @lang('menu.register')
+                                </a></li>
                             @endif
                         @else
                             <li class="dropdown">
@@ -63,13 +67,13 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="{{ url('/contents/create') }}">
-                                            Upload
+                                            @lang('menu.upload')
                                         </a>
                                     </li>
                                     @if (Auth::check())
                                     <li>
                                         <a href="{{ url('/users/' . Auth::user()->id) }}">
-                                            My Page
+                                            @lang('menu.mypage')
                                         </a>
                                     </li>
                                     @endif
@@ -78,7 +82,7 @@
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            @lang('menu.logout')
                                         </a>
 
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">

@@ -4,7 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 text-center">
-            <h1>Invitation</h1>
+            <h1>
+                @lang('form.invitation')
+            </h1>
         </div>
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -14,7 +16,9 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                            <label for="name" class="col-md-4 control-label">
+                                @lang('form.name')
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
@@ -28,7 +32,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('userid') ? ' has-error' : '' }}">
-                            <label for="userid" class="col-md-4 control-label">UserID</label>
+                            <label for="userid" class="col-md-4 control-label">
+                                @lang('form.userid')
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="userid" type="text" class="form-control" name="userid" value="{{ old('userid') }}" required>
@@ -42,7 +48,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                            <label for="password" class="col-md-4 control-label">
+                                @lang('form.new_password')
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -56,7 +64,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                            <label for="password-confirm" class="col-md-4 control-label">
+                                @lang('form.confirm_password')
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
@@ -66,7 +76,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Join
+                                    @lang('form.join')
                                 </button>
                             </div>
                         </div>
