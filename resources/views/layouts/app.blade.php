@@ -49,7 +49,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        @if (Auth::guest() && env('PUBLIC_REGISTER', false))
+                        @if (Auth::guest())
                             @if(env('PUBLIC_REGISTER', false))
                                 <li><a href="{{ url('/login') }}">Login</a></li>
                                 <li><a href="{{ url('/register') }}">Register</a></li>
