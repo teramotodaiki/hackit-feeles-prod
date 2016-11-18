@@ -82,13 +82,16 @@
                 {{ config('app.name', 'Laravel') }}
                 </div>
 
+                @if (isset($invitation))
+                <div class="links m-b-md">
+                    <a href="/invitations">Join</a>
+                </div>
+                @endif
+
                 <div class="links">
                     <a href="/contents">Works</a>
                     <a href="/users">Member</a>
                     <a href="/studentLogin">Login</a>
-                    @if (isset($invitation))
-                    <a href="/invitations">Join</a>
-                    @endif
                     <a href="/admin">Admin</a>
                 </div>
             </div>
