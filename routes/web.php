@@ -22,6 +22,9 @@ Route::get('/home', 'HomeController@index');
 Route::get('/invitations', 'InvitationController@index');
 Route::post('/invitations', 'InvitationController@store');
 
+Route::get('/studentLogin', 'StudentLoginController@index');
+Route::post('/studentLogin', 'StudentLoginController@authenticate');
+
 Route::resource('contents', 'ContentController');
 Route::post('contents/{id}/update', 'ContentController@update'); // With multipart/form-data
 

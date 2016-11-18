@@ -70,7 +70,7 @@
         @endif
 
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+            @if (Route::has('login') && env('PUBLIC_REGISTER', false))
                 <div class="top-right links">
                     <a href="{{ url('/login') }}">Login</a>
                     <a href="{{ url('/register') }}">Register</a>
@@ -82,12 +82,16 @@
                 {{ config('app.name', 'Laravel') }}
                 </div>
 
+                @if (isset($invitation))
+                <div class="links m-b-md">
+                    <a href="/invitations">Join</a>
+                </div>
+                @endif
+
                 <div class="links">
                     <a href="/contents">Works</a>
                     <a href="/users">Member</a>
-                    @if (isset($invitation))
-                    <a href="/invitations">Join</a>
-                    @endif
+                    <a href="/studentLogin">Login</a>
                     <a href="/admin">Admin</a>
                 </div>
             </div>
