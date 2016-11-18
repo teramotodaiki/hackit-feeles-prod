@@ -3,7 +3,7 @@
 @section('content')
 <div class="content-overlay">
 
-    <iframe sandbox="allow-scripts" src="{{ url($content->src) }}"></iframe>
+    <iframe sandbox="allow-scripts allow-modals allow-popups" src="{{ url($content->src) }}"></iframe>
 
     <nav class="content_footer navbar navbar-default">
 
