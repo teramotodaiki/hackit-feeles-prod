@@ -9,26 +9,30 @@
         <div class="col-md-8 col-md-offset-2">
 
             <div class="panel panel-default">
-                <div class="panel-heading">Edit content</div>
+                <div class="panel-heading">
+                    @lang('form.edit')
+                </div>
                 <div class="panel-body">
                     @include('contents.form', [
                         'action' => url("/contents/{$content->id}/update"),
-                        'submit' => 'Edit',
+                        'submit' => trans('form.edit'),
                     ])
                 </div>
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Danger zone</div>
+                <div class="panel-heading">
+                    @lang('form.danger_zone')
+                </div>
                 <div class="panel-body">
 
                     <div class="alert alert-danger" role="alert">
                         <span>
-                            Delete this content
+                            @lang('form.delete_content')
                         </span>
                         <button type="submit" class="btn btn-danger pull-right" onclick="event.preventDefault();
                                  document.getElementById('delete-form').submit();">
-                            DELETE
+                            @lang('form.delete')
                         </button>
                     </div>
 
