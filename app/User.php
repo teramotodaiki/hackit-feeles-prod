@@ -27,6 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $casts = [
+        'id' => 'integer',
+    ];
+
     public function contents()
     {
         return $this->hasMany('App\Content');
