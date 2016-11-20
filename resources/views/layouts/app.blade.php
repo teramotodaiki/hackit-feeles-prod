@@ -21,6 +21,7 @@
     </script>
 </head>
 <body>
+    @include('vendor/google-analytics')
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">

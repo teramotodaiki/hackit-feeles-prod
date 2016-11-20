@@ -65,6 +65,8 @@
         </style>
     </head>
     <body>
+        @include('vendor/google-analytics')
+
         @if(session('message'))
         <div style="color: red">{{ session('message') }}</div>
         @endif
