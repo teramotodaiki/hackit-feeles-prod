@@ -8,6 +8,9 @@ $('.content_item').on('click', (event) => {
 
   const $iframe = $item.find('iframe');
   if (!$iframe.attr('src')) {
+    $iframe.on('load', () => {
+      $item.find('.content_loading').fadeOut()
+    });
     $iframe.attr('src', $iframe.data('src'));
   }
 

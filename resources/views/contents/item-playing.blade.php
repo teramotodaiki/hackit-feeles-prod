@@ -32,4 +32,8 @@
 
     </div>
 
+    <div class="content_loading">
+        <span class="glyphicon glyphicon-refresh"></span>
+    </div>
+
 </div>
