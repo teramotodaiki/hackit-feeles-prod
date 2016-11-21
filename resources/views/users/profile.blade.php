@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="col-md-9 col-sm-12 container">
-            <div class="row content_list">
+            <div class="row container-content">
             @each('contents.item', $contents, 'content')
             </div>
             <div class="text-center">

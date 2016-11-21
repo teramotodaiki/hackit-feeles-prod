@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container content_list">
+<div class="container container-content">
     <div class="row">
     @each('contents.item', $contents, 'content')
     </div>
