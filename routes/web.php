@@ -15,15 +15,21 @@ Route::get('/', function () {
     return view('welcome', ['invitation' => App\Invitation::first()]);
 });
 
-Auth::routes();
+if (env('PUBLIC_REGISTER', false)) {
+    Auth::routes();
+} else {
+    Route::get('login', 'StudentLoginController@index')->name('login');
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+}
+Route::get('studentLogin', 'StudentLoginController@index');
+Route::post('studentLogin', 'StudentLoginController@authenticate');
+
 
 Route::get('/home', 'HomeController@index');
 
 Route::get('/invitations', 'InvitationController@index');
 Route::post('/invitations', 'InvitationController@store');
 
-Route::get('/studentLogin', 'StudentLoginController@index');
-Route::post('/studentLogin', 'StudentLoginController@authenticate');
 
 Route::resource('contents', 'ContentController');
 Route::post('contents/{id}/update', 'ContentController@update'); // With multipart/form-data
