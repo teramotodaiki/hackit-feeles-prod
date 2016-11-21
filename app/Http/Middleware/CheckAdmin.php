@@ -17,7 +17,7 @@ class CheckAdmin
     {
         $user = $request->user();
         if (!$user || !$user->is_admin) {
-            return redirect('/login');
+            return redirect('/studentLogin');
         }
 
         return $next($request);
