@@ -1,6 +1,6 @@
 <div class="content_playing">
 
-    <iframe sandbox="allow-scripts allow-modals allow-popups" data-src="{{ url($content->src) }}"></iframe>
+    <iframe data-src="{{ url($content->src) }}"></iframe>
 
     <div class="content_footer">
 
