@@ -27,7 +27,7 @@ class StudentLoginController extends Controller
         if (Auth::attempt([
             'userid' => $request->input('userid'),
             'password' => $request->input('password')
-        ])) {
+        ], $request->has('remember'))) {
             // 認証に成功した
             return redirect()->intended('home');
         }

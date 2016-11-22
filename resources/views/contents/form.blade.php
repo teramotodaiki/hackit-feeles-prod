@@ -43,7 +43,7 @@
         </label>
 
         <div class="col-md-6">
-            <input id="content" type="file" class="form-control" name="content" value="{{ old('content') }}" required accept="text/html">
+            <input id="content" type="file" class="form-control" name="content" value="{{ old('content') }}" accept="text/html" {{ $required_content ? 'required' : '' }}>
 
             @if ($errors->has('content'))
                 <span class="help-block">

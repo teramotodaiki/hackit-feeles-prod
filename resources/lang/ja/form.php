@@ -25,8 +25,7 @@ return [
     'current_password' => '現在のパスワード',
     'new_password' => '新しいパスワード',
     'confirm_password' => '新しいパスワード (確認)',
-
-
+    'remember' => 'ログインしたままにする',
 
     'invite_member' => 'メンバーを招待',
     'add_invitation' => '招待枠の追加',

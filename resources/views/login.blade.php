@@ -45,6 +45,23 @@
                         </div>
 
                         <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember">
+                                        @lang('form.remember')
+                                    </label>
+                                </div>
+
+                                @if ($errors->has('remember'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('remember') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     @lang('menu.login')

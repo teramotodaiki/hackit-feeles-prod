@@ -16,6 +16,7 @@
                     @include('contents.form', [
                         'action' => url("/contents/{$content->id}/update"),
                         'submit' => trans('form.edit'),
+                        'required_content' => false,
                     ])
                 </div>
             </div>

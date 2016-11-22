@@ -9,7 +9,7 @@
     <div class="content_article">
         <h3>{{ $content->title }}</h3>
         @if (Auth::check() && $content->user_id === Auth::user()->id)
-        <a href="/contents/{{ $content->id }}/edit" class="btn btn-primary btn-sm">
+        <a href="{{ url("/contents/{$content->id}/edit") }}" class="btn btn-primary btn-sm" onclick="arguments[0].stopPropagation()">
             @lang('form.edit')
         </a>
         @else
