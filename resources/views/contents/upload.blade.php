@@ -12,6 +12,7 @@
                     @include('contents.form', [
                         'action' => url('/contents'),
                         'submit' => trans('form.upload'),
+                        'required_content' => true,
                     ])
                 </div>
             </div>
