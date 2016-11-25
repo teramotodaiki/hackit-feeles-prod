@@ -30,6 +30,10 @@ class StudentLoginController extends Controller
         ], $request->has('remember'))) {
             // 認証に成功した
             return redirect()->intended('home');
+        } else {
+            return back()->withInput()
+                ->with('status', 'danger')
+                ->with('message', trans('form.login_failed'));
         }
     }
 }
