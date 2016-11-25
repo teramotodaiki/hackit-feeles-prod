@@ -25,9 +25,9 @@
         </label>
 
         <div class="col-md-6">
-            <input id="description" type="text" class="form-control" name="description" value="{{
+            <textarea id="description" type="text" class="form-control" name="description">{{
                 isset($content) ? $content->description : old('description')
-            }}">
+            }}</textarea>
 
             @if ($errors->has('description'))
                 <span class="help-block">
