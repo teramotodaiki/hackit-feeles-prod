@@ -13,7 +13,7 @@
             @lang('form.edit')
         </a>
         @else
-        <a href="/users/{{ $content->user_id }}" class="btn btn-link" title="{{ $content->user->name }}">
+        <a href="/users/{{ $content->user_id }}" class="btn btn-link" title="{{ $content->user->name }}" onclick="arguments[0].stopPropagation()">
             {{ $content->user->name }}
         </a>
         @endif
