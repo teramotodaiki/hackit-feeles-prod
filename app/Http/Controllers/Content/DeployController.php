@@ -21,7 +21,7 @@ class DeployController extends BaseController
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -31,7 +31,7 @@ class DeployController extends BaseController
      */
     public function create()
     {
-        //
+        return view('deployments.create');
     }
 
     /**
@@ -42,7 +42,15 @@ class DeployController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+        ]);
+
+        $result = $this->_store($request);
+        $content = $result['content'];
+
+        return redirect("deployments/{$content->id}/edit");
     }
 
     /**
@@ -53,8 +61,8 @@ class DeployController extends BaseController
      */
     public function show(Request $request, $id)
     {
-        return view('contents.deploy',
-            $this->_edit($request, $id));
+        return view('deployments.menu',
+            $this->_show($request, $id));
     }
 
     /**
@@ -63,9 +71,10 @@ class DeployController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        return view('deployments.deploy',
+            $this->_edit($request, $id));
     }
 
     /**
