@@ -37,7 +37,7 @@ class RawUploader
     function upload($request, $name)
     {
         $tmpdir = 'tmp/';
-        $localPath = public_path($tmpdir) . str_random(16);
+        $localPath = $tmpdir . str_random(16);
         file_put_contents($localPath, $request->input($name));
 
         $localFile = new File($localPath);
