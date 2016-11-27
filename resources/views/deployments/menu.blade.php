@@ -14,6 +14,9 @@
 
                         @if(Auth::user()->id === $content->user_id)
                         <div class="col-md-6" style="margin-bottom: 1rem;">
+                            <span>
+                                @lang('form.title'): <span>{{ $content->title }}</span>
+                            </span>
                             <a href="{{ url("/deployments/{$content->id}/edit") }}" class="btn btn-block btn-primary">
                                 @lang('form.updateApp')
                             </a>
