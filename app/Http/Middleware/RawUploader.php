@@ -44,10 +44,12 @@ class RawUploader
 
         if (!env('BLOB_ENABLED')) {
             // fallback: local storage
-            return Storage::url(
+            $url = Storage::url(
                 Storage::disk('public')
                     ->putFile($name, $localFile)
             );
+            unlink($localPath);
+            return $url;
         }
 
         if (!isset($this->blobRestProxy)) {
