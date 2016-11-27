@@ -12,6 +12,7 @@ class WebController extends BaseController
     {
         $this->middleware('auth');
         $this->middleware('uploader:content,thumbnail')->only(['store', 'update']);
+        $this->middleware('uploader.raw:content')->only(['updateFromPopout']);
     }
 
     /**
@@ -104,6 +105,18 @@ class WebController extends BaseController
     {
         return view('contents.uploadFromFeeles',
             $this->_edit($request, $id));
+    }
+
+    public function updateFromPopout(Request $request, $id)
+    {
+        $this->validate($request, [
+            'content' => 'required|string',
+        ]);
+
+        $this->_update($request, $id);
+
+        return redirect()->back()
+            ->with('status', 'success');
     }
 
 }

@@ -90,12 +90,12 @@ class BaseController extends Controller
             abort(403);
         }
 
-        if ($request->hasFile('content')) {
+        if (isset($request->uploaded->content)) {
             $content->src = $request->uploaded->content;
             $content->save();
         }
 
-        if ($request->hasFile('thumbnail')) {
+        if (isset($request->uploaded->thumbnail)) {
             $content->thumbnail = $request->uploaded->thumbnail;
             $content->save();
         }
