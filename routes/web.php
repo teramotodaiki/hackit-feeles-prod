@@ -31,8 +31,9 @@ Route::get('/invitations', 'InvitationController@index');
 Route::post('/invitations', 'InvitationController@store');
 
 
-Route::resource('contents', 'ContentController');
-Route::post('contents/{id}/update', 'ContentController@update'); // With multipart/form-data
+Route::resource('contents', 'Content\WebController');
+Route::post('contents/{id}/update', 'Content\WebController@update'); // With multipart/form-data
+Route::resource('deployments', 'Content\DeployController');
 
 Route::resource('users', 'UserController');
 Route::post('users/{id}/update', 'UserController@update'); // With multipart/form-data

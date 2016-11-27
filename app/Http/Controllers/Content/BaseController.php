@@ -1,85 +1,85 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Content;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Content;
 
-class ContentController extends Controller
+class BaseController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('uploader:content,thumbnail')->only(['store', 'update']);
-    }
-
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    protected function _index(Request $request)
     {
         $contents = Content::orderBy('id', 'desc')
             ->simplePaginate(12);
 
-        return view('contents/index', ['contents' => $contents]);
+        return ['contents' => $contents];
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    protected function _create(Request $request)
     {
-        return view('contents/upload');
+        return [];
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    protected function _store(Request $request)
     {
         $user = $request->user();
         $content = new Content;
         $content->user_id = $user->id;
         $content->title = $request->input('title');
         $content->description = $request->input('description');
-        $content->src = $request->uploaded->content;
-        $content->thumbnail = $request->uploaded->thumbnail;
+        if (isset($request->uploaded->content)) {
+            $content->src = $request->uploaded->content;
+        } else {
+            $content->src = '';
+        }
+        if (isset($request->uploaded->thumbnail)) {
+            $content->thumbnail = $request->uploaded->thumbnail;
+        }
         $content->save();
 
-        return view('contents/uploaded', ['content' => $content]);
+        return ['content' => $content];
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    protected function _show(Request $request, $id)
     {
         $content = Content::findOrFail($id);
 
-        return view('contents/play', ['content' => $content]);
+        return ['content' => $content];
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    protected function _edit(Request $request, $id)
     {
         $content = Content::findOrFail($id);
 
-        return view('contents/edit', ['content' => $content]);
+        if ($content->user_id !== $request->user()->id) {
+            abort(403);
+        }
+
+        return ['content' => $content];
     }
 
     /**
@@ -87,53 +87,46 @@ class ContentController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    protected function _update(Request $request, $id)
     {
-        $this->validate($request, [
-            'title' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-        ]);
-
         $content = Content::findOrFail($id);
+
         if ($content->user_id !== $request->user()->id) {
-            return response('Forbidden', 403);
+            abort(403);
         }
 
-        if ($request->hasFile('content')) {
+        if (isset($request->uploaded->content)) {
             $content->src = $request->uploaded->content;
             $content->save();
         }
 
-        if ($request->hasFile('thumbnail')) {
+        if (isset($request->uploaded->thumbnail)) {
             $content->thumbnail = $request->uploaded->thumbnail;
             $content->save();
         }
 
         $content->update($request->all());
 
-        return redirect()
-            ->route('contents.edit', [$content])
-            ->with('status', 'success');
+        return ['content' => $content];
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    protected function _destroy(Request $request, $id)
     {
         $content = Content::findOrFail($id);
+
         if ($content->user_id !== $request->user()->id) {
-            return response('Forbidden', 403);
+            abort(403);
         }
 
         $content->delete();
 
-        return redirect('/home');
+        return [];
     }
 
 }

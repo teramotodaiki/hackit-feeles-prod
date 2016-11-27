@@ -14,9 +14,11 @@ require('./bootstrap');
  */
 
 // Vue.component('example', require('./components/Example.vue'));
-//
-// const app = new Vue({
-//     el: '#app'
-// });
+
+Vue.component('upload-from-feeles', require('./components/uploadFromFeeles.vue'));
+
+const app = new Vue({
+    el: '#app'
+});
 
 require('./content');
