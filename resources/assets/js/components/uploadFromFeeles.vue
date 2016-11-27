@@ -3,7 +3,8 @@
         <div class="content_loading">
             <span class="glyphicon glyphicon-refresh"></span>
         </div>
-        <form id="upload-from-feeles" class="hidden" v-bind:action="'/contents/' + contentId + '/popout'" method="POST">
+        <form id="upload-from-feeles" class="hidden" v-bind:action="'/deployments/' + contentId" method="POST">
+            <input type="hidden" name="_method" value="PUT" />
             <input type="hidden" name="_token" value="" />
             <input type="hidden" name="content" value="" />
         </form>

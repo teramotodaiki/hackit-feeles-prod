@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use App\Content;
 use App\Http\Controllers\Content\BaseController;
 
-class WebController extends BaseController
+class DeployController extends BaseController
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('uploader:content,thumbnail')->only(['store', 'update']);
+        $this->middleware('uploader.raw:content')->only(['update']);
     }
 
     /**
@@ -19,9 +19,9 @@ class WebController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        return view('contents/index', $this->_index($request));
+        //
     }
 
     /**
@@ -29,9 +29,9 @@ class WebController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        return view('contents/upload', $this->_create($request));
+        //
     }
 
     /**
@@ -42,7 +42,7 @@ class WebController extends BaseController
      */
     public function store(Request $request)
     {
-        return view('contents/uploaded', $this->_store($request));
+        //
     }
 
     /**
@@ -53,7 +53,8 @@ class WebController extends BaseController
      */
     public function show(Request $request, $id)
     {
-        return view('contents/play', $this->_show($request, $id));
+        return view('contents.deploy',
+            $this->_edit($request, $id));
     }
 
     /**
@@ -62,9 +63,9 @@ class WebController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
-        return view('contents/edit', $this->_edit($request, $id));
+        //
     }
 
     /**
@@ -77,14 +78,12 @@ class WebController extends BaseController
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'content' => 'required|string',
         ]);
 
         $this->_update($request, $id);
 
-        return redirect()->back()
-            ->with('status', 'success');
+        return redirect('contents/' . $id);
     }
 
     /**
@@ -93,11 +92,8 @@ class WebController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $this->_destroy($request, $id);
-
-        return redirect()->back();
+        //
     }
-
 }

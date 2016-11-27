@@ -33,8 +33,7 @@ Route::post('/invitations', 'InvitationController@store');
 
 Route::resource('contents', 'Content\WebController');
 Route::post('contents/{id}/update', 'Content\WebController@update'); // With multipart/form-data
-Route::get('contents/{id}/popout', 'Content\WebController@popout');
-Route::post('contents/{id}/popout', 'Content\WebController@updateFromPopout');
+Route::resource('deployments', 'Content\DeployController');
 
 Route::resource('users', 'UserController');
 Route::post('users/{id}/update', 'UserController@update'); // With multipart/form-data
