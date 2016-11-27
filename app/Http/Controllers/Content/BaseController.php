@@ -69,6 +69,10 @@ class BaseController extends Controller
     {
         $content = Content::findOrFail($id);
 
+        if ($content->user_id !== $request->user()->id) {
+            abort(403);
+        }
+
         return ['content' => $content];
     }
 
