@@ -12,6 +12,10 @@ return [
     'danger_zone' => '危険ゾーン',
     'delete_content' => 'この作品を削除する',
     'delete' => '削除',
+    'newApp' => 'あたらしく作成',
+    'deployApp' => '作品をデプロイする',
+    'updateApp' => '前の作品にうわがき',
+    'createApp' => 'あたらしい作品にする',
 
     'successfully_uploaded' => 'アップロードできました!',
     'play' => 'プレイする',
