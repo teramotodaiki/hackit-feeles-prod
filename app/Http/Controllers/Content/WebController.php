@@ -100,4 +100,10 @@ class WebController extends BaseController
         return redirect()->back();
     }
 
+    public function popout(Request $request, $id)
+    {
+        return view('contents.uploadFromFeeles',
+            $this->_edit($request, $id));
+    }
+
 }
