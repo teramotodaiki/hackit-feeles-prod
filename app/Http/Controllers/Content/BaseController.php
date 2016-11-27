@@ -41,8 +41,14 @@ class BaseController extends Controller
         $content->user_id = $user->id;
         $content->title = $request->input('title');
         $content->description = $request->input('description');
-        $content->src = $request->uploaded->content;
-        $content->thumbnail = $request->uploaded->thumbnail;
+        if (isset($request->uploaded->content)) {
+            $content->src = $request->uploaded->content;
+        } else {
+            $content->src = '';
+        }
+        if (isset($request->uploaded->thumbnail)) {
+            $content->thumbnail = $request->uploaded->thumbnail;
+        }
         $content->save();
 
         return ['content' => $content];
