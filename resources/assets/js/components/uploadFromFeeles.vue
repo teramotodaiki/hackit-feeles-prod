@@ -13,7 +13,7 @@
 <script>
     export default {
 
-        props: ['contentId'],
+        props: ['contentId', 'publishUrl'],
 
         mounted() {
             const $form = $('#upload-from-feeles');
@@ -25,7 +25,11 @@
                 $form.submit();
             };
 
-            opener.postMessage('', '*', [channel.port2]);
+            const provider = JSON.stringify({
+                publishUrl: this.publishUrl,
+            });
+
+            opener.postMessage(provider, '*', [channel.port2]);
         }
     }
 </script>
