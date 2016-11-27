@@ -25,7 +25,7 @@
                 $form.submit();
             };
 
-            parent.postMessage('', '*', [channel.port2]);
+            opener.postMessage('', '*', [channel.port2]);
         }
     }
 </script>
