@@ -97,7 +97,7 @@ class WebController extends BaseController
     {
         $this->_destroy($request, $id);
 
-        return redirect()->back();
+        return redirect('contents');
     }
 
 }
