@@ -44,7 +44,7 @@ class DeployController extends BaseController
     {
         $this->validate($request, [
             'title' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'string|max:255',
         ]);
 
         $result = $this->_store($request);
