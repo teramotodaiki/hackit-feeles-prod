@@ -20,6 +20,7 @@ $('.content_item').on('click', (event) => {
 $('.content_close').on('click', (event) => {
   const $item = $(event.target).parents('.content_item-playing');
   $item.toggleClass(classes);
+  $item.find('iframe').attr('src', '');
 
   event.stopPropagation();
 });
