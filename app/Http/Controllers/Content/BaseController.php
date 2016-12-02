@@ -75,7 +75,7 @@ class BaseController extends Controller
     {
         $content = Content::findOrFail($id);
 
-        if ($content->user_id !== $request->user()->id) {
+        if (!$content->isAllowedBy($request->user())) {
             abort(403);
         }
 
@@ -92,7 +92,7 @@ class BaseController extends Controller
     {
         $content = Content::findOrFail($id);
 
-        if ($content->user_id !== $request->user()->id) {
+        if (!$content->isAllowedBy($request->user())) {
             abort(403);
         }
 
@@ -120,7 +120,7 @@ class BaseController extends Controller
     {
         $content = Content::findOrFail($id);
 
-        if ($content->user_id !== $request->user()->id) {
+        if (!$content->isAllowedBy($request->user())) {
             abort(403);
         }
 

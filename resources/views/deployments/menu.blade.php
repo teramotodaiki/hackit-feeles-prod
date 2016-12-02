@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <div class="row">
 
-                        @if(Auth::user()->id === $content->user_id)
+                        @if($content->isAllowedBy(Auth::user()))
                         <div class="col-md-6" style="margin-bottom: 1rem;">
                             <span>
                                 @lang('form.title'): <span>{{ $content->title }}</span>
