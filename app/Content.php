@@ -24,4 +24,9 @@ class Content extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function isAllowedBy($user)
+    {
+        return $user->is_admin || $this->user_id === $user->id;
+    }
 }
