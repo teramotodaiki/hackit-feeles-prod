@@ -103,5 +103,7 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+
+    @include('vendor/slaask-widget')
 </body>
 </html>
