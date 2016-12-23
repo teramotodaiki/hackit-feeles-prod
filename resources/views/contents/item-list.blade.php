@@ -17,5 +17,8 @@
             {{ $content->user->name }}
         </a>
         @endif
+        <a href="{{ $content->src }}" target="_blank" class="btn btn-link" onclick="arguments[0].stopPropagation()">
+            @lang('content.open_tab')
+        </a>
     </div>
 </div>

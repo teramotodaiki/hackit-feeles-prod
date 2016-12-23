@@ -2,6 +2,7 @@
 
 return [
     'no_descriptions' => 'No Descriptions',
+    'open_tab' => 'New Tab',
     'sort' => 'Sort',
     'title_asc' => 'Dictionary',
     'title_desc' => 'Reversed',

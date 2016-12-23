@@ -2,6 +2,7 @@
 
 return [
     'no_descriptions' => '説明文なし',
+    'open_tab' => 'タブで開く',
     'sort' => '並び順',
     'title_asc' => '辞書順',
     'title_desc' => '逆順',
