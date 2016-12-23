@@ -8,6 +8,9 @@ use App\Content;
 
 class BaseController extends Controller
 {
+    public static $sortable = ['title', 'created_at', 'updated_at'];
+    public static $orderable = ['asc', 'desc'];
+
     /**
      * Display a listing of the resource.
      *
@@ -15,15 +18,20 @@ class BaseController extends Controller
     protected function _index(Request $request)
     {
         $this->validate($request, [
-            'sort' => 'string|in:id,title,created_at,updated_at',
-            'order' => 'string|in:asc,desc',
+            'sort' => 'string|in:' . implode(self::$sortable, ','),
+            'order' => 'string|in:' . implode(self::$orderable, ','),
         ]);
-        $contents = Content::orderBy(
-            $request->input('sort', 'id'),
-            $request->input('order', 'desc'))
-            ->simplePaginate(12);
+        $sort = $request->input('sort', 'updated_at');
+        $order = $request->input('order', 'desc');
+        $contents = Content::orderBy($sort, $order)
+            ->simplePaginate(2)
+            ->appends(['sort' => $sort, 'order' => $order]);
 
-        return ['contents' => $contents];
+        return [
+            'contents' => $contents,
+            'sortable' => self::$sortable,
+            'orderable' => self::$orderable,
+        ];
     }
 
     /**
