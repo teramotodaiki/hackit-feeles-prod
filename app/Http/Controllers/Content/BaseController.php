@@ -14,7 +14,13 @@ class BaseController extends Controller
      */
     protected function _index(Request $request)
     {
-        $contents = Content::orderBy('id', 'desc')
+        $this->validate($request, [
+            'sort' => 'string|in:id,title,created_at,updated_at',
+            'order' => 'string|in:asc,desc',
+        ]);
+        $contents = Content::orderBy(
+            $request->input('sort', 'id'),
+            $request->input('order', 'desc'))
             ->simplePaginate(12);
 
         return ['contents' => $contents];
