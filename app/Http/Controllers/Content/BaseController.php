@@ -24,7 +24,7 @@ class BaseController extends Controller
         $sort = $request->input('sort', 'updated_at');
         $order = $request->input('order', 'desc');
         $contents = Content::orderBy($sort, $order)
-            ->simplePaginate(2)
+            ->simplePaginate(12)
             ->appends(['sort' => $sort, 'order' => $order]);
 
         return [
