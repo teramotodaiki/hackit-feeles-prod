@@ -15,9 +15,9 @@
 
     <!-- Scripts -->
     <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
+        window.Laravel = {
+            csrfToken: "{{ csrf_token() }}",
+        };
     </script>
 </head>
 <body>
@@ -103,5 +103,7 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+
+    @include('vendor/slaask-widget')
 </body>
 </html>

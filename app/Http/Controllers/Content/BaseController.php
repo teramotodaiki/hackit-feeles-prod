@@ -8,16 +8,30 @@ use App\Content;
 
 class BaseController extends Controller
 {
+    public static $sortable = ['title', 'created_at', 'updated_at'];
+    public static $orderable = ['asc', 'desc'];
+
     /**
      * Display a listing of the resource.
      *
      */
     protected function _index(Request $request)
     {
-        $contents = Content::orderBy('id', 'desc')
-            ->simplePaginate(12);
+        $this->validate($request, [
+            'sort' => 'string|in:' . implode(self::$sortable, ','),
+            'order' => 'string|in:' . implode(self::$orderable, ','),
+        ]);
+        $sort = $request->input('sort', 'updated_at');
+        $order = $request->input('order', 'desc');
+        $contents = Content::orderBy($sort, $order)
+            ->simplePaginate(12)
+            ->appends(['sort' => $sort, 'order' => $order]);
 
-        return ['contents' => $contents];
+        return [
+            'contents' => $contents,
+            'sortable' => self::$sortable,
+            'orderable' => self::$orderable,
+        ];
     }
 
     /**
@@ -75,7 +89,7 @@ class BaseController extends Controller
     {
         $content = Content::findOrFail($id);
 
-        if ($content->user_id !== $request->user()->id) {
+        if (!$content->isAllowedBy($request->user())) {
             abort(403);
         }
 
@@ -92,7 +106,7 @@ class BaseController extends Controller
     {
         $content = Content::findOrFail($id);
 
-        if ($content->user_id !== $request->user()->id) {
+        if (!$content->isAllowedBy($request->user())) {
             abort(403);
         }
 
@@ -120,7 +134,7 @@ class BaseController extends Controller
     {
         $content = Content::findOrFail($id);
 
-        if ($content->user_id !== $request->user()->id) {
+        if (!$content->isAllowedBy($request->user())) {
             abort(403);
         }
 

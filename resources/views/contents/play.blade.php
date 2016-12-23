@@ -7,7 +7,7 @@
 
     <nav class="content_footer navbar navbar-default">
 
-        @if (Auth::check() && Auth::user()->id === $content->user->id)
+        @if (Auth::check() && $content->isAllowedBy(Auth::user()))
         <a href="/contents/{{ $content->id }}/edit" class="btn btn-primary">
             @lang('form.edit')
         </a>

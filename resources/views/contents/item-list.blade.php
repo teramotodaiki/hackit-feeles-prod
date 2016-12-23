@@ -8,7 +8,7 @@
     </div>
     <div class="content_article">
         <h3>{{ $content->title }}</h3>
-        @if (Auth::check() && $content->user_id === Auth::user()->id)
+        @if (Auth::check() && $content->isAllowedBy(Auth::user()))
         <a href="{{ url("/contents/{$content->id}/edit") }}" class="btn btn-primary btn-sm" onclick="arguments[0].stopPropagation()">
             @lang('form.edit')
         </a>
@@ -17,5 +17,8 @@
             {{ $content->user->name }}
         </a>
         @endif
+        <a href="{{ $content->src }}" target="_blank" class="btn btn-link" onclick="arguments[0].stopPropagation()">
+            @lang('content.open_tab')
+        </a>
     </div>
 </div>
