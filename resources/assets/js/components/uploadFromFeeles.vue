@@ -21,8 +21,8 @@
 
             const channel = new MessageChannel();
             channel.port1.onmessage = (event) => {
-                $form.find('input[name="content"]').val(event.data);
-                $form.submit();
+                $form.find('input[name="content"]').get(0).value = event.data;
+                $form.get(0).submit();
             };
 
             const provider = JSON.stringify({
