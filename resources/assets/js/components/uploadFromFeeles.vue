@@ -16,6 +16,7 @@
         props: ['contentId', 'publishUrl'],
 
         mounted() {
+            console.log('updated');
             const $form = $('#upload-from-feeles');
             $form.find('input[name="_token"]').val(Laravel.csrfToken);
 
