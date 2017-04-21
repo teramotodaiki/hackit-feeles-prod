@@ -96,6 +96,8 @@
                 </div>
                 @endif
 
+                <a href="https://www.feeles.com">🚛💨🚚💨お引越ししました🚛💨🚚💨</a>
+
                 <div class="links">
                     <a href="/contents">@lang('menu.works')</a>
                     <a href="/users">@lang('menu.member')</a>
